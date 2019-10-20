@@ -23008,31 +23008,64 @@
 	var Home = exports.Home = function (_React$Component) {
 	    _inherits(Home, _React$Component);
 	
-	    function Home() {
+	    function Home(props) {
 	        _classCallCheck(this, Home);
 	
-	        return _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).apply(this, arguments));
+	        var _this = _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).call(this));
+	
+	        _this.state = {
+	            age: props.initialAge,
+	            status: 0
+	        };
+	        setTimeout(function () {
+	            _this.setState({
+	                status: 1
+	            });
+	        }, 3000);
+	        return _this;
 	    }
 	
 	    _createClass(Home, [{
+	        key: "onMakeOlder",
+	        value: function onMakeOlder() {
+	            this.setState({
+	                age: this.state.age + 3
+	            });
+	        }
+	    }, {
 	        key: "render",
 	        value: function render() {
-	            var age = this.props.age + 1;
+	            var _this2 = this;
+	
 	            return _react2.default.createElement(
 	                "div",
 	                null,
 	                _react2.default.createElement(
-	                    "h3",
+	                    "p",
 	                    null,
-	                    "Hello ",
-	                    this.props.name,
-	                    "!"
+	                    "In a new Component!"
 	                ),
 	                _react2.default.createElement(
 	                    "p",
 	                    null,
-	                    "You're almost ",
-	                    age
+	                    "Your name is ",
+	                    this.props.name,
+	                    ", your age is ",
+	                    this.state.age
+	                ),
+	                _react2.default.createElement(
+	                    "p",
+	                    null,
+	                    "Status: ",
+	                    this.state.status
+	                ),
+	                _react2.default.createElement("hr", null),
+	                _react2.default.createElement(
+	                    "button",
+	                    { onClick: function onClick() {
+	                            return _this2.onMakeOlder();
+	                        }, className: "btn btn-primary" },
+	                    "Make me older!"
 	                )
 	            );
 	        }
@@ -23040,6 +23073,11 @@
 	
 	    return Home;
 	}(_react2.default.Component);
+	
+	Home.propTypes = {
+	    name: _react2.default.PropTypes.string,
+	    initialAge: _react2.default.PropTypes.number
+	};
 
 /***/ })
 /******/ ]);
